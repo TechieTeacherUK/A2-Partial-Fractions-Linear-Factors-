@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edexcel A-Level Maths [2.9] - Partial Fractions Practice</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- MathJax for rendering TeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$$', '$$'], ['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    /* Smooth transitions and scrollbar styling */
+    html { scroll-behavior: smooth; }
+    .accordion-content { transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
+  </style>
+</head>
+<body class="h-full flex flex-col text-slate-800 antialiased font-sans">
+
+  <!-- Top Navigation Header -->
+  <header class="bg-indigo-900 text-white shadow-lg border-b border-indigo-700">
+    <div class="max-w-6xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center space-x-3">
+        <span class="bg-indigo-600 text-indigo-100 text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Edexcel 9MA0</span>
+        <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">Pure Maths 2.9: Partial Fractions</h1>
+      </div>
+      <div class="flex items-center space-x-2 text-sm text-indigo-200">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Interactive Practice Hub</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8 space-y-8">
+
+    <!-- Section 1: Theory & Quick Cheat Sheet -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+          <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          Theory & Key Rules
+        </h2>
+        <span class="text-xs bg-slate-100 text-slate-600 font-semibold px-2.5 py-1 rounded-full">Cheat Sheet</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Rule 1 -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 hover:border-indigo-300 transition-colors">
+          <div class="flex items-center space-x-2 text-indigo-700 font-bold mb-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs">1</span>
+            <h3>Check Fraction Degree</h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
+            Must be a <strong>proper fraction</strong> ($$\text{degree of numerator} < \text{degree of denominator}$$).
+          </p>
+          <div class="text-xs bg-white border border-slate-200 rounded-lg p-2.5 text-center text-slate-700">
+            If improper, perform polynomial division first!
+          </div>
+        </div>
+
+        <!-- Rule 2 -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 hover:border-indigo-300 transition-colors">
+          <div class="flex items-center space-x-2 text-indigo-700 font-bold mb-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs">2</span>
+            <h3>Linear Factor Form</h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
+            Assign a constant numerator ($$A, B, C$$) to each distinct linear factor in the denominator.
+          </p>
+          <div class="text-xs bg-white border border-slate-200 rounded-lg p-2.5 text-center font-mono text-indigo-900">
+            $$\frac{px + q}{(ax + b)(cx + d)} \equiv \frac{A}{ax + b} + \frac{B}{cx + d}$$
+          </div>
+        </div>
+
+        <!-- Rule 3 -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 hover:border-indigo-300 transition-colors">
+          <div class="flex items-center space-x-2 text-indigo-700 font-bold mb-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs">3</span>
+            <h3>Solving for Constants</h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
+            Clear denominators by multiplying through, then use <strong>strategic substitution</strong> ($$x = \text{root}$$) to eliminate terms.
+          </p>
+          <div class="text-xs bg-white border border-slate-200 rounded-lg p-2.5 text-center text-slate-700">
+            $$px + q \equiv A(cx + d) + B(ax + b)$$
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Lesson Worked Examples Accordion -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+          <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          Lesson Worked Examples
+        </h2>
+        <span class="text-xs text-slate-500">Click to expand step-by-step solutions</span>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Example 1 -->
+        <div class="border border-slate-200 rounded-xl overflow-hidden">
+          <button onclick="toggleAccordion('ex1')" class="w-full bg-slate-50 hover:bg-slate-100 p-4 text-left font-semibold flex justify-between items-center text-slate-800 text-sm sm:text-base">
+            <span class="flex items-center gap-3">
+              <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-md font-bold">Example 1 [4 marks]</span>
+              <span>Express $$\frac{7x - 2}{(x - 2)(x + 3)}$$ in partial fractions.</span>
+            </span>
+            <svg id="ex1-icon" class="w-5 h-5 text-slate-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div id="ex1-body" class="hidden p-5 bg-white border-t border-slate-200 space-y-4 text-sm text-slate-700">
+            <p><strong>Step 1: Set up the identity</strong></p>
+            <p class="pl-4 font-mono">$$\frac{7x - 2}{(x - 2)(x + 3)} \equiv \frac{A}{x - 2} + \frac{B}{x + 3}$$</p>
+            <p><strong>Step 2: Clear denominators</strong></p>
+            <p class="pl-4 font-mono">$$7x - 2 \equiv A(x + 3) + B(x - 2)$$</p>
+            <p><strong>Step 3: Substitute values</strong></p>
+            <ul class="list-disc pl-8 space-y-1">
+              <li>Sub $$x = 2 \implies 7(2) - 2 = A(5) \implies 12 = 5A \implies A = \frac{12}{5}$$</li>
+              <li>Sub $$x = -3 \implies 7(-3) - 2 = B(-5) \implies -23 = -5B \implies B = \frac{23}{5}$$</li>
+            </ul>
+            <p class="pt-2 font-bold text-indigo-900 border-t border-slate-100">
+              $$\text{Final Result: } \frac{12}{5(x - 2)} + \frac{23}{5(x + 3)}$$
+            </p>
+          </div>
+        </div>
+
+        <!-- Example 2 -->
+        <div class="border border-slate-200 rounded-xl overflow-hidden">
+          <button onclick="toggleAccordion('ex2')" class="w-full bg-slate-50 hover:bg-slate-100 p-4 text-left font-semibold flex justify-between items-center text-slate-800 text-sm sm:text-base">
+            <span class="flex items-center gap-3">
+              <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-md font-bold">Example 2 [5 marks]</span>
+              <span>Split $$\frac{4x + 10}{2x^2 - 5x - 3}$$ into partial fractions.</span>
+            </span>
+            <svg id="ex2-icon" class="w-5 h-5 text-slate-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div id="ex2-body" class="hidden p-5 bg-white border-t border-slate-200 space-y-4 text-sm text-slate-700">
+            <p><strong>Step 1: Factorise denominator first</strong></p>
+            <p class="pl-4 font-mono">$$2x^2 - 5x - 3 = (2x + 1)(x - 3)$$</p>
+            <p class="pl-4 font-mono">$$\frac{4x + 10}{(2x + 1)(x - 3)} \equiv \frac{A}{2x + 1} + \frac{B}{x - 3}$$</p>
+            <p><strong>Step 2: Clear denominators & solve constants</strong></p>
+            <p class="pl-4 font-mono">$$4x + 10 \equiv A(x - 3) + B(2x + 1)$$</p>
+            <ul class="list-disc pl-8 space-y-1">
+              <li>Sub $$x = 3 \implies 4(3) + 10 = B(7) \implies 22 = 7B \implies B = \frac{22}{7}$$</li>
+              <li>Sub $$x = -\frac{1}{2} \implies 4(-\frac{1}{2}) + 10 = A(-\frac{7}{2}) \implies 8 = -\frac{7}{2}A \implies A = -\frac{16}{7}$$</li>
+            </ul>
+            <p class="pt-2 font-bold text-indigo-900 border-t border-slate-100">
+              $$\text{Final Result: } -\frac{16}{7(2x + 1)} + \frac{22}{7(x - 3)}$$
+            </p>
+          </div>
+        </div>
+
+        <!-- Example 3 -->
+        <div class="border border-slate-200 rounded-xl overflow-hidden">
+          <button onclick="toggleAccordion('ex3')" class="w-full bg-slate-50 hover:bg-slate-100 p-4 text-left font-semibold flex justify-between items-center text-slate-800 text-sm sm:text-base">
+            <span class="flex items-center gap-3">
+              <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-md font-bold">Example 3 [6 marks]</span>
+              <span>Express $$\frac{3x^2 + 8x - 5}{(x - 1)(x + 2)(x + 3)}$$ in partial fractions.</span>
+            </span>
+            <svg id="ex3-icon" class="w-5 h-5 text-slate-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div id="ex3-body" class="hidden p-5 bg-white border-t border-slate-200 space-y-4 text-sm text-slate-700">
+            <p><strong>Step 1: Set up three linear terms</strong></p>
+            <p class="pl-4 font-mono">$$\frac{3x^2 + 8x - 5}{(x - 1)(x + 2)(x + 3)} \equiv \frac{A}{x - 1} + \frac{B}{x + 2} + \frac{C}{x + 3}$$</p>
+            <p><strong>Step 2: Clear denominators</strong></p>
+            <p class="pl-4 font-mono">$$3x^2 + 8x - 5 \equiv A(x + 2)(x + 3) + B(x - 1)(x + 3) + C(x - 1)(x + 2)$$</p>
+            <p><strong>Step 3: Solve for $$A, B, C$$</strong></p>
+            <ul class="list-disc pl-8 space-y-1">
+              <li>Sub $$x = 1 \implies 6 = A(3)(4) \implies 12A = 6 \implies A = \frac{1}{2}$$</li>
+              <li>Sub $$x = -2 \implies -9 = B(-3)(1) \implies -3B = -9 \implies B = 3$$</li>
+              <li>Sub $$x = -3 \implies -2 = C(-4)(-1) \implies 4C = -2 \implies C = -\frac{1}{2}$$</li>
+            </ul>
+            <p class="pt-2 font-bold text-indigo-900 border-t border-slate-100">
+              $$\text{Final Result: } \frac{1}{2(x - 1)} + \frac{3}{x + 2} - \frac{1}{2(x + 3)}$$
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Interactive Practice Generator -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Dynamic Question Generator
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">Endless practice questions created on the fly in authentic Edexcel exam style.</p>
+        </div>
+
+        <!-- Difficulty Tiers -->
+        <div class="inline-flex p-1 bg-slate-100 rounded-xl space-x-1">
+          <button id="btn-level1" onclick="setDifficulty('level1')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-indigo-600 text-white shadow-sm">
+            Level 1 (Integers)
+          </button>
+          <button id="btn-level2" onclick="setDifficulty('level2')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900">
+            Level 2 (Fractions)
+          </button>
+          <button id="btn-level3" onclick="setDifficulty('level3')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900">
+            Level 3 (Quadratic / 3 Terms)
+          </button>
+        </div>
+      </div>
+
+      <!-- Question Box -->
+      <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-6 space-y-6">
+        <div class="flex items-center justify-between">
+          <span id="question-badge" class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+            Level 1
+          </span>
+          <div class="flex items-center space-x-4 text-xs sm:text-sm font-medium text-slate-600">
+            <span>Score: <strong id="score-counter" class="text-indigo-700 font-bold">0</strong>/<span id="total-counter">0</span></span>
+            <span>Streak: <strong id="streak-counter" class="text-emerald-600 font-bold">0 🔥</strong></span>
+          </div>
+        </div>
+
+        <!-- Question Prompt Area -->
+        <div class="bg-white rounded-xl p-6 border border-indigo-100 shadow-sm text-center min-h-[100px] flex items-center justify-center">
+          <div id="question-display" class="text-base sm:text-lg font-medium text-slate-900 leading-relaxed">
+            Generating question...
+          </div>
+        </div>
+
+        <!-- Inputs Area -->
+        <div class="bg-white rounded-xl p-6 border border-indigo-100 shadow-sm space-y-4">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Enter your values for the constants:</h3>
+          
+          <div id="inputs-container" class="flex flex-wrap items-center justify-center gap-4 text-sm font-semibold">
+            <!-- Dynamic Input Fields injected by JS -->
+          </div>
+          <p class="text-xs text-center text-slate-400">Note: You can enter exact integers or simplified decimals/fractions (e.g. 1.5 or 3/2).</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <button onclick="checkAnswer()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-md hover:shadow-lg transition-all text-sm flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Submit Answer
+          </button>
+          
+          <button onclick="generateQuestion()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-md hover:shadow-lg transition-all text-sm flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            New Question
+          </button>
+
+          <button onclick="toggleSolution()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl transition-all text-sm">
+            Toggle Worked Solution
+          </button>
+        </div>
+
+        <!-- Feedback Banner -->
+        <div id="feedback-area" class="hidden rounded-xl p-4 text-center font-bold text-sm transition-all"></div>
+
+        <!-- Step-by-Step Worked Solution Drawer -->
+        <div id="solution-drawer" class="hidden bg-white rounded-xl p-6 border border-slate-200 text-slate-700 text-sm space-y-3">
+          <h4 class="font-bold text-indigo-900 border-b border-slate-100 pb-2">Full Worked Solution:</h4>
+          <div id="solution-content" class="space-y-2"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 text-center">
+    <div class="max-w-6xl mx-auto px-4">
+      <p>Edexcel A-Level Mathematics (9MA0) • Pure Mathematics 2.9 Partial Fractions Practice Module</p>
+    </div>
+  </footer>
+
+  <script>
+    let currentDifficulty = 'level1';
+    let currentQuestionData = {};
+    let score = 0;
+    let total = 0;
+    let streak = 0;
+
+    // Accordion Toggle function
+    function toggleAccordion(id) {
+      const body = document.getElementById(id + '-body');
+      const icon = document.getElementById(id + '-icon');
+      if (body.classList.contains('hidden')) {
+        body.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        body.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    }
+
+    function setDifficulty(diff) {
+      currentDifficulty = diff;
+      
+      // Update Tab Styles
+      ['level1', 'level2', 'level3'].forEach(d => {
+        const btn = document.getElementById('btn-' + d);
+        if (d === diff) {
+          btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-indigo-600 text-white shadow-sm";
+        } else {
+          btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900";
+        }
+      });
+
+      // Update Badge
+      const badge = document.getElementById('question-badge');
+      if (diff === 'level1') badge.innerText = "Level 1 (Distinct Linear)";
+      if (diff === 'level2') badge.innerText = "Level 2 (Fractional Constants)";
+      if (diff === 'level3') badge.innerText = "Level 3 (Quadratic / 3 Terms)";
+
+      generateQuestion();
+    }
+
+    function getRandomInt(min, max, allowZero = false) {
+      let num = 0;
+      while (num === 0 && !allowZero) {
+        num = Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      return num;
+    }
+
+    function parseFractionOrDecimal(input) {
+      if (!input) return NaN;
+      input = input.trim();
+      if (input.includes('/')) {
+        const parts = input.split('/');
+        if (parts.length === 2) {
+          return parseFloat(parts[0]) / parseFloat(parts[1]);
+        }
+      }
+      return parseFloat(input);
+    }
+
+    function generateQuestion() {
+      // Clear Feedback & Solution
+      const feedback = document.getElementById('feedback-area');
+      feedback.className = 'hidden';
+      document.getElementById('solution-drawer').classList.add('hidden');
+
+      let qData = {};
+
+      if (currentDifficulty === 'level1') {
+        // Level 1: (px + q)/((x + c1)(x + c2)) = A/(x + c1) + B/(x + c2)
+        // A, B are small integers
+        let c1 = getRandomInt(-5, 5);
+        let c2 = getRandomInt(-5, 5);
+        while (c1 === c2) c2 = getRandomInt(-5, 5);
+
+        let A = getRandomInt(-5, 5);
+        let B = getRandomInt(-5, 5);
+
+        let p = A + B;
+        let q = A * c2 + B * c1;
+
+        let c1Str = c1 > 0 ? `+ ${c1}` : `- ${Math.abs(c1)}`;
+        let c2Str = c2 > 0 ? `+ ${c2}` : `- ${Math.abs(c2)}`;
+        let qStr = q >= 0 ? `+ ${q}` : `- ${Math.abs(q)}`;
+
+        qData = {
+          type: 'two_term',
+          A: A,
+          B: B,
+          c1: c1,
+          c2: c2,
+          texPrompt: `Express \\(\\frac{${p}x ${qStr}}{(x ${c1Str})(x ${c2Str})}\\) in the form \\(\\frac{A}{x ${c1Str}} + \\frac{B}{x ${c2Str}}\\).`,
+          inputs: ['A', 'B'],
+          solution: `
+            <p><strong>1. Clear denominators:</strong> $$${p}x ${qStr} \\equiv A(x ${c2Str}) + B(x ${c1Str})$$</p>
+            <p><strong>2. Substitute $$x = ${-c1}$$:</strong> $$${p}(${-c1}) ${qStr} = A(${-c1} ${c2Str}) \\implies A = ${A}$$</p>
+            <p><strong>3. Substitute $$x = ${-c2}$$:</strong> $$${p}(${-c2}) ${qStr} = B(${-c2} ${c1Str}) \\implies B = ${B}$$</p>
+          `
+        };
+      } 
+      else if (currentDifficulty === 'level2') {
+        // Level 2: Fractional numerators or coefficient on x
+        let c1 = getRandomInt(-4, 4);
+        let c2 = getRandomInt(-4, 4);
+        while (c1 === c2) c2 = getRandomInt(-4, 4);
+
+        let numDenom = getRandomInt(2, 5);
+        let A_num = getRandomInt(-7, 7);
+        let B_num = getRandomInt(-7, 7);
+
+        let A = A_num / numDenom;
+        let B = B_num / numDenom;
+
+        let p_num = A_num + B_num;
+        let q_num = A_num * c2 + B_num * c1;
+
+        let c1Str = c1 > 0 ? `+ ${c1}` : `- ${Math.abs(c1)}`;
+        let c2Str = c2 > 0 ? `+ ${c2}` : `- ${Math.abs(c2)}`;
+
+        qData = {
+          type: 'two_term',
+          A: A,
+          B: B,
+          texPrompt: `Express \\(\\frac{${p_num}x ${q_num >= 0 ? '+ ' + q_num : '- ' + Math.abs(q_num)}}{${numDenom}(x ${c1Str})(x ${c2Str})}\\) in the form \\(\\frac{A}{x ${c1Str}} + \\frac{B}{x ${c2Str}}\\).`,
+          inputs: ['A', 'B'],
+          solution: `
+            <p><strong>1. Clear denominators:</strong> $$\\frac{${p_num}x ${q_num >= 0 ? '+ ' + q_num : '- ' + Math.abs(q_num)}}{${numDenom}} \\equiv A(x ${c2Str}) + B(x ${c1Str})$$</p>
+            <p><strong>2. Sub $$x = ${-c1}$$:</strong> $$A = \\frac{${A_num}}{${numDenom}} = ${A}$$</p>
+            <p><strong>3. Sub $$x = ${-c2}$$:</strong> $$B = \\frac{${B_num}}{${numDenom}} = ${B}$$</p>
+          `
+        };
+      } 
+      else {
+        // Level 3: Unfactorised quadratic or 3 terms
+        let isThreeTerm = Math.random() > 0.5;
+
+        if (isThreeTerm) {
+          let c1 = -1, c2 = 2, c3 = 3;
+          let A = getRandomInt(-3, 3);
+          let B = getRandomInt(-3, 3);
+          let C = getRandomInt(-3, 3);
+
+          qData = {
+            type: 'three_term',
+            A: A,
+            B: B,
+            C: C,
+            texPrompt: `Express \\(\\frac{${A+B+C}x^2 + ${A*(c2+c3)+B*(c1+c3)+C*(c1+c2)}x + ${A*c2*c3+B*c1*c3+C*c1*c2}}{(x - 1)(x + 2)(x + 3)}\\) in the form \\(\\frac{A}{x - 1} + \\frac{B}{x + 2} + \\frac{C}{x + 3}\\).`,
+            inputs: ['A', 'B', 'C'],
+            solution: `
+              <p><strong>1. Clear denominators:</strong> $$P(x) \\equiv A(x+2)(x+3) + B(x-1)(x+3) + C(x-1)(x+2)$$</p>
+              <p><strong>2. Sub $$x = 1$$:</strong> $$12A = \\dots \\implies A = ${A}$$</p>
+              <p><strong>3. Sub $$x = -2$$:</strong> $$-3B = \\dots \\implies B = ${B}$$</p>
+              <p><strong>4. Sub $$x = -3$$:</strong> $$4C = \\dots \\implies C = ${C}$$</p>
+            `
+          };
+        } else {
+          // Quadratic denominator
+          let c1 = getRandomInt(1, 4);
+          let c2 = -getRandomInt(1, 4);
+          let bCoeff = c1 + c2;
+          let cCoeff = c1 * c2;
+
+          let A = getRandomInt(-4, 4);
+          let B = getRandomInt(-4, 4);
+          let p = A + B;
+          let q = A * c2 + B * c1;
+
+          let bStr = bCoeff >= 0 ? `+ ${bCoeff}` : `- ${Math.abs(bCoeff)}`;
+          let cStr = cCoeff >= 0 ? `+ ${cCoeff}` : `- ${Math.abs(cCoeff)}`;
+          let c1Str = c1 > 0 ? `+ ${c1}` : `- ${Math.abs(c1)}`;
+          let c2Str = c2 > 0 ? `+ ${c2}` : `- ${Math.abs(c2)}`;
+
+          qData = {
+            type: 'two_term',
+            A: A,
+            B: B,
+            texPrompt: `Express \\(\\frac{${p}x ${q >= 0 ? '+ ' + q : '- ' + Math.abs(q)}}{x^2 ${bStr}x ${cStr}}\\)` +
+                      ` in the form \\(\\frac{A}{x ${c1Str}} + \\frac{B}{x ${c2Str}}\\).`,
+            inputs: ['A', 'B'],
+            solution: `
+              <p><strong>1. Factorise denominator:</strong> $$x^2 ${bStr}x ${cStr} = (x ${c1Str})(x ${c2Str})$$</p>
+              <p><strong>2. Clear denominators:</strong> $$${p}x ${q >= 0 ? '+ ' + q : '- ' + Math.abs(q)} \\equiv A(x ${c2Str}) + B(x ${c1Str})$$</p>
+              <p><strong>3. Solve constants:</strong> $$A = ${A}, B = ${B}$$</p>
+            `
+          };
+        }
+      }
+
+      currentQuestionData = qData;
+
+      // Render Prompt
+      document.getElementById('question-display').innerHTML = qData.texPrompt;
+
+      // Render Input Fields
+      const inputContainer = document.getElementById('inputs-container');
+      inputContainer.innerHTML = '';
+      qData.inputs.forEach(varName => {
+        const field = document.createElement('div');
+        field.className = 'flex items-center space-x-2 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg';
+        field.innerHTML = `
+          <label for="input-${varName}" class="font-bold text-indigo-900">${varName} =</label>
+          <input type="text" id="input-${varName}" placeholder="0" class="w-20 px-2 py-1 border border-slate-300 rounded text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono text-base">
+        `;
+        inputContainer.appendChild(field);
+      });
+
+      // Render Solution Drawer content
+      document.getElementById('solution-content').innerHTML = qData.solution;
+
+      // Trigger MathJax re-render
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+      }
+    }
+
+    function checkAnswer() {
+      const q = currentQuestionData;
+      let isCorrect = true;
+
+      q.inputs.forEach(varName => {
+        const userVal = parseFractionOrDecimal(document.getElementById(`input-${varName}`).value);
+        const expectedVal = q[varName];
+        
+        if (isNaN(userVal) || Math.abs(userVal - expectedVal) > 0.02) {
+          isCorrect = false;
+        }
+      });
+
+      total++;
+      document.getElementById('total-counter').innerText = total;
+
+      const feedback = document.getElementById('feedback-area');
+      feedback.classList.remove('hidden');
+
+      if (isCorrect) {
+        score++;
+        streak++;
+        document.getElementById('score-counter').innerText = score;
+        document.getElementById('streak-counter').innerText = streak + ' 🔥';
+
+        feedback.className = 'rounded-xl p-4 text-center font-bold text-sm bg-emerald-100 text-emerald-800 border border-emerald-200';
+        feedback.innerText = "✨ Excellent! Your constants are completely correct.";
+      } else {
+        streak = 0;
+        document.getElementById('streak-counter').innerText = '0 🔥';
+
+        feedback.className = 'rounded-xl p-4 text-center font-bold text-sm bg-rose-100 text-rose-800 border border-rose-200';
+        let expectedStr = q.inputs.map(v => `${v} = ${q[v]}`).join(', ');
+        feedback.innerText = `❌ Not quite. Expected values: ${expectedStr}. Click 'Toggle Worked Solution' below to inspect the steps!`;
+      }
+    }
+
+    function toggleSolution() {
+      const drawer = document.getElementById('solution-drawer');
+      drawer.classList.toggle('hidden');
+      if (!drawer.classList.contains('hidden') && window.MathJax) {
+        MathJax.typesetPromise();
+      }
+    }
+
+    // Initialize on window load
+    window.onload = function() {
+      generateQuestion();
+    };
+  </script>
+</body>
+</html>
