@@ -26,6 +26,19 @@
     /* Smooth transitions and scrollbar styling */
     html { scroll-behavior: smooth; }
     .accordion-content { transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
+
+    /* MathJax renders each formula as a single non-wrapping block, which
+       overflows narrow cards/boxes on small screens. Let any formula that's
+       wider than its box scroll horizontally instead of spilling out. */
+    mjx-container {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 2px; /* room for scrollbar so it doesn't clip descenders */
+    }
+    mjx-container[display="true"] {
+      margin: 0.5em 0 !important;
+    }
   </style>
 </head>
 <body class="h-full flex flex-col text-slate-800 antialiased font-sans">
@@ -65,7 +78,7 @@
             <h3>Check Fraction Degree</h3>
           </div>
           <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
-            Must be a <strong>proper fraction</strong> ($$\text{degree of numerator} < \text{degree of denominator}$$).
+            Must be a <strong>proper fraction</strong> (degree of numerator &lt; degree of denominator).
           </p>
           <div class="text-xs bg-white border border-slate-200 rounded-lg p-2.5 text-center text-slate-700">
             If improper, perform polynomial division first!
@@ -115,12 +128,12 @@
       <div class="space-y-4">
         <!-- Example 1 -->
         <div class="border border-slate-200 rounded-xl overflow-hidden">
-          <button onclick="toggleAccordion('ex1')" class="w-full bg-slate-50 hover:bg-slate-100 p-4 text-left font-semibold flex justify-between items-center text-slate-800 text-sm sm:text-base">
-            <span class="flex items-center gap-3">
-              <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-md font-bold">Example 1 [4 marks]</span>
-              <span>Express $$\frac{7x - 2}{(x - 2)(x + 3)}$$ in partial fractions.</span>
+          <button onclick="toggleAccordion('ex1')" class="w-full bg-slate-50 hover:bg-slate-100 p-4 text-left font-semibold flex justify-between items-center gap-3 text-slate-800 text-sm sm:text-base">
+            <span class="flex items-center gap-3 min-w-0 flex-1">
+              <span class="shrink-0 bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-md font-bold">Example 1 [4 marks]</span>
+              <span class="min-w-0">Express $$\frac{7x - 2}{(x - 2)(x + 3)}$$ in partial fractions.</span>
             </span>
-            <svg id="ex1-icon" class="w-5 h-5 text-slate-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg id="ex1-icon" class="shrink-0 w-5 h-5 text-slate-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </button>
           <div id="ex1-body" class="hidden p-5 bg-white border-t border-slate-200 space-y-4 text-sm text-slate-700">
             <p><strong>Step 1: Set up the identity</strong></p>
@@ -140,12 +153,12 @@
 
         <!-- Example 2 -->
         <div class="border border-slate-200 rounded-xl overflow-hidden">
-          <button onclick="toggleAccordion('ex2')" class="w-full bg-slate-50 hover:bg-slate-100 p-4 text-left font-semibold flex justify-between items-center text-slate-800 text-sm sm:text-base">
-            <span class="flex items-center gap-3">
-              <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-md font-bold">Example 2 [5 marks]</span>
-              <span>Split $$\frac{4x + 10}{2x^2 - 5x - 3}$$ into partial fractions.</span>
+          <button onclick="toggleAccordion('ex2')" class="w-full bg-slate-50 hover:bg-slate-100 p-4 text-left font-semibold flex justify-between items-center gap-3 text-slate-800 text-sm sm:text-base">
+            <span class="flex items-center gap-3 min-w-0 flex-1">
+              <span class="shrink-0 bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-md font-bold">Example 2 [5 marks]</span>
+              <span class="min-w-0">Split $$\frac{4x + 10}{2x^2 - 5x - 3}$$ into partial fractions.</span>
             </span>
-            <svg id="ex2-icon" class="w-5 h-5 text-slate-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg id="ex2-icon" class="shrink-0 w-5 h-5 text-slate-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </button>
           <div id="ex2-body" class="hidden p-5 bg-white border-t border-slate-200 space-y-4 text-sm text-slate-700">
             <p><strong>Step 1: Factorise denominator first</strong></p>
@@ -165,12 +178,12 @@
 
         <!-- Example 3 -->
         <div class="border border-slate-200 rounded-xl overflow-hidden">
-          <button onclick="toggleAccordion('ex3')" class="w-full bg-slate-50 hover:bg-slate-100 p-4 text-left font-semibold flex justify-between items-center text-slate-800 text-sm sm:text-base">
-            <span class="flex items-center gap-3">
-              <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-md font-bold">Example 3 [6 marks]</span>
-              <span>Express $$\frac{3x^2 + 8x - 5}{(x - 1)(x + 2)(x + 3)}$$ in partial fractions.</span>
+          <button onclick="toggleAccordion('ex3')" class="w-full bg-slate-50 hover:bg-slate-100 p-4 text-left font-semibold flex justify-between items-center gap-3 text-slate-800 text-sm sm:text-base">
+            <span class="flex items-center gap-3 min-w-0 flex-1">
+              <span class="shrink-0 bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-md font-bold">Example 3 [6 marks]</span>
+              <span class="min-w-0">Express $$\frac{3x^2 + 8x - 5}{(x - 1)(x + 2)(x + 3)}$$ in partial fractions.</span>
             </span>
-            <svg id="ex3-icon" class="w-5 h-5 text-slate-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg id="ex3-icon" class="shrink-0 w-5 h-5 text-slate-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </button>
           <div id="ex3-body" class="hidden p-5 bg-white border-t border-slate-200 space-y-4 text-sm text-slate-700">
             <p><strong>Step 1: Set up three linear terms</strong></p>
@@ -203,14 +216,14 @@
         </div>
 
         <!-- Difficulty Tiers -->
-        <div class="inline-flex p-1 bg-slate-100 rounded-xl space-x-1">
-          <button id="btn-level1" onclick="setDifficulty('level1')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-indigo-600 text-white shadow-sm">
+        <div class="flex flex-wrap gap-1 p-1 bg-slate-100 rounded-xl">
+          <button id="btn-level1" onclick="setDifficulty('level1')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-indigo-600 text-white shadow-sm whitespace-nowrap">
             Level 1 (Integers)
           </button>
-          <button id="btn-level2" onclick="setDifficulty('level2')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900">
+          <button id="btn-level2" onclick="setDifficulty('level2')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
             Level 2 (Fractions)
           </button>
-          <button id="btn-level3" onclick="setDifficulty('level3')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900">
+          <button id="btn-level3" onclick="setDifficulty('level3')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
             Level 3 (Quadratic / 3 Terms)
           </button>
         </div>
@@ -308,9 +321,9 @@
       ['level1', 'level2', 'level3'].forEach(d => {
         const btn = document.getElementById('btn-' + d);
         if (d === diff) {
-          btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-indigo-600 text-white shadow-sm";
+          btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-indigo-600 text-white shadow-sm whitespace-nowrap";
         } else {
-          btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900";
+          btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap";
         }
       });
 
@@ -420,29 +433,53 @@
         let isThreeTerm = Math.random() > 0.5;
 
         if (isThreeTerm) {
-          let c1 = -1, c2 = 2, c3 = 3;
+          // Randomise three distinct linear factors (x + c1)(x + c2)(x + c3)
+          // so the denominator varies each time, not just A, B, C.
+          let c1 = getRandomInt(-4, 4);
+          let c2 = getRandomInt(-4, 4);
+          while (c2 === c1) c2 = getRandomInt(-4, 4);
+          let c3 = getRandomInt(-4, 4);
+          while (c3 === c1 || c3 === c2) c3 = getRandomInt(-4, 4);
+
           let A = getRandomInt(-3, 3);
           let B = getRandomInt(-3, 3);
           let C = getRandomInt(-3, 3);
+          // Reroll if the x^2 coefficient vanishes, so the numerator always
+          // genuinely looks like a quadratic.
+          while (A + B + C === 0) {
+            C = getRandomInt(-3, 3);
+          }
+
+          let p2 = A + B + C;
+          let p1 = A * (c2 + c3) + B * (c1 + c3) + C * (c1 + c2);
+          let p0 = A * c2 * c3 + B * c1 * c3 + C * c1 * c2;
+
+          let c1Str = c1 > 0 ? `+ ${c1}` : `- ${Math.abs(c1)}`;
+          let c2Str = c2 > 0 ? `+ ${c2}` : `- ${Math.abs(c2)}`;
+          let c3Str = c3 > 0 ? `+ ${c3}` : `- ${Math.abs(c3)}`;
+          let p1Str = p1 >= 0 ? `+ ${p1}` : `- ${Math.abs(p1)}`;
+          let p0Str = p0 >= 0 ? `+ ${p0}` : `- ${Math.abs(p0)}`;
 
           qData = {
             type: 'three_term',
             A: A,
             B: B,
             C: C,
-            texPrompt: `Express \\(\\frac{${A+B+C}x^2 + ${A*(c2+c3)+B*(c1+c3)+C*(c1+c2)}x + ${A*c2*c3+B*c1*c3+C*c1*c2}}{(x - 1)(x + 2)(x + 3)}\\) in the form \\(\\frac{A}{x - 1} + \\frac{B}{x + 2} + \\frac{C}{x + 3}\\).`,
+            texPrompt: `Express \\(\\frac{${p2}x^2 ${p1Str}x ${p0Str}}{(x ${c1Str})(x ${c2Str})(x ${c3Str})}\\) in the form \\(\\frac{A}{x ${c1Str}} + \\frac{B}{x ${c2Str}} + \\frac{C}{x ${c3Str}}\\).`,
             inputs: ['A', 'B', 'C'],
             solution: `
-              <p><strong>1. Clear denominators:</strong> $$P(x) \\equiv A(x+2)(x+3) + B(x-1)(x+3) + C(x-1)(x+2)$$</p>
-              <p><strong>2. Sub $$x = 1$$:</strong> $$12A = \\dots \\implies A = ${A}$$</p>
-              <p><strong>3. Sub $$x = -2$$:</strong> $$-3B = \\dots \\implies B = ${B}$$</p>
-              <p><strong>4. Sub $$x = -3$$:</strong> $$4C = \\dots \\implies C = ${C}$$</p>
+              <p><strong>1. Clear denominators:</strong> $$P(x) \\equiv A(x ${c2Str})(x ${c3Str}) + B(x ${c1Str})(x ${c3Str}) + C(x ${c1Str})(x ${c2Str})$$</p>
+              <p><strong>2. Sub $$x = ${-c1}$$:</strong> $$P(${-c1}) = A(${-c1} ${c2Str})(${-c1} ${c3Str}) \\implies A = ${A}$$</p>
+              <p><strong>3. Sub $$x = ${-c2}$$:</strong> $$P(${-c2}) = B(${-c2} ${c1Str})(${-c2} ${c3Str}) \\implies B = ${B}$$</p>
+              <p><strong>4. Sub $$x = ${-c3}$$:</strong> $$P(${-c3}) = C(${-c3} ${c1Str})(${-c3} ${c2Str}) \\implies C = ${C}$$</p>
             `
           };
         } else {
-          // Quadratic denominator
-          let c1 = getRandomInt(1, 4);
-          let c2 = -getRandomInt(1, 4);
+          // Quadratic denominator — roots can be any mix of positive/negative
+          // (not always one of each), as long as they're distinct.
+          let c1 = getRandomInt(-4, 4);
+          let c2 = getRandomInt(-4, 4);
+          while (c2 === c1) c2 = getRandomInt(-4, 4);
           let bCoeff = c1 + c2;
           let cCoeff = c1 * c2;
 
